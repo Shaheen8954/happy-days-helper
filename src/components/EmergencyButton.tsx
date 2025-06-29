@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Phone } from 'lucide-react';
+import { Phone, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -20,15 +20,17 @@ const EmergencyButton = () => {
         size="lg"
         className="bg-red-600 hover:bg-red-700 text-white text-xl px-6 py-3 border-2 border-red-700"
       >
-        🚨 Emergency
+        <AlertTriangle className="w-6 h-6 mr-2" />
+        Emergency
       </Button>
 
       {showEmergency && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="p-8 max-w-md w-full mx-4 border-4 border-red-500">
+          <Card className="p-8 max-w-md w-full mx-4 border-4 border-red-500 bg-white dark:bg-gray-900">
             <div className="text-center space-y-6">
-              <h2 className="text-4xl font-bold text-red-600 mb-6">
-                🚨 Emergency
+              <h2 className="text-4xl font-bold text-red-600 mb-6 flex items-center justify-center">
+                <AlertTriangle className="w-12 h-12 mr-2" />
+                Emergency
               </h2>
               
               <div className="space-y-4">
