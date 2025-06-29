@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Home, Calendar, Pill, Heart, Users, Volume2 } from 'lucide-react';
+import { Home, Calendar, Pill, Heart, Users, Volume2, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { BeamsBackground } from '@/components/ui/beams-background';
@@ -105,14 +105,26 @@ const Index = () => {
       <header className="bg-white/10 dark:bg-white/5 backdrop-blur-sm border-b border-white/20">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <Button
-              onClick={() => handleNavigation('home', 'Home')}
-              variant="ghost"
-              className="text-2xl font-bold text-white hover:bg-white/20 px-6 py-3"
-            >
-              <Home className="w-8 h-8 mr-2" />
-              Home
-            </Button>
+            <div className="flex items-center space-x-4">
+              {currentView !== 'home' && (
+                <Button
+                  onClick={() => handleNavigation('home', 'Home')}
+                  variant="ghost"
+                  className="text-2xl font-bold text-white hover:bg-white/20 px-6 py-3"
+                >
+                  <ArrowLeft className="w-8 h-8 mr-2" />
+                  Back
+                </Button>
+              )}
+              <Button
+                onClick={() => handleNavigation('home', 'Home')}
+                variant="ghost"
+                className="text-2xl font-bold text-white hover:bg-white/20 px-6 py-3"
+              >
+                <Home className="w-8 h-8 mr-2" />
+                Home
+              </Button>
+            </div>
             
             <div className="flex items-center space-x-4">
               <Button
