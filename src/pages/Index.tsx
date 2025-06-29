@@ -4,6 +4,7 @@ import { Home, Calendar, Pill, Heart, Users, Volume2, ArrowLeft } from 'lucide-r
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { BeamsBackground } from '@/components/ui/beams-background';
+import { NavBar } from '@/components/ui/tubelight-navbar';
 import VoiceAssistant from '@/components/VoiceAssistant';
 import MedicineReminders from '@/components/MedicineReminders';
 import AppointmentBooking from '@/components/AppointmentBooking';
@@ -32,6 +33,39 @@ const Index = () => {
       speak(`Opening ${label}`);
     }
   };
+
+  const navItems = [
+    {
+      name: 'Home',
+      onClick: () => handleNavigation('home', 'Home'),
+      icon: Home,
+      isActive: currentView === 'home'
+    },
+    {
+      name: 'Medicine',
+      onClick: () => handleNavigation('medicine', 'Medicine Reminders'),
+      icon: Pill,
+      isActive: currentView === 'medicine'
+    },
+    {
+      name: 'Appointments',
+      onClick: () => handleNavigation('appointments', 'Appointments'),
+      icon: Calendar,
+      isActive: currentView === 'appointments'
+    },
+    {
+      name: 'Family',
+      onClick: () => handleNavigation('family', 'Family Contacts'),
+      icon: Users,
+      isActive: currentView === 'family'
+    },
+    {
+      name: 'Health Tips',
+      onClick: () => handleNavigation('health', 'Health Tips'),
+      icon: Heart,
+      isActive: currentView === 'health'
+    }
+  ];
 
   const renderCurrentView = () => {
     switch (currentView) {
@@ -107,8 +141,11 @@ const Index = () => {
 
   return (
     <BeamsBackground intensity="medium">
-      {/* Header */}
-      <header className="bg-white/10 dark:bg-white/5 backdrop-blur-sm border-b border-white/20">
+      {/* Tubelight Navigation */}
+      <NavBar items={navItems} />
+
+      {/* Secondary Header */}
+      <header className="bg-white/10 dark:bg-white/5 backdrop-blur-sm border-b border-white/20 mt-20">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -122,14 +159,6 @@ const Index = () => {
                   Back
                 </Button>
               )}
-              <Button
-                onClick={() => handleNavigation('home', 'Home')}
-                variant="ghost"
-                className="text-2xl font-bold text-white hover:bg-white/20 px-6 py-3"
-              >
-                <Home className="w-8 h-8 mr-2" />
-                Home
-              </Button>
             </div>
             
             <div className="flex items-center space-x-4">
