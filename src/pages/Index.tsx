@@ -8,6 +8,7 @@ import VoiceAssistant from '@/components/VoiceAssistant';
 import MedicineReminders from '@/components/MedicineReminders';
 import AppointmentBooking from '@/components/AppointmentBooking';
 import FamilyContacts from '@/components/FamilyContacts';
+import HealthTips from '@/components/HealthTips';
 import EmergencyButton from '@/components/EmergencyButton';
 import ThemeToggle from '@/components/ThemeToggle';
 
@@ -40,6 +41,8 @@ const Index = () => {
         return <AppointmentBooking />;
       case 'family':
         return <FamilyContacts />;
+      case 'health':
+        return <HealthTips />;
       default:
         return (
           <div className="space-y-8">
@@ -86,7 +89,10 @@ const Index = () => {
                 </div>
               </Card>
 
-              <Card className="p-8 bg-white/10 dark:bg-white/5 border-white/20 backdrop-blur-sm">
+              <Card 
+                className="p-8 hover:shadow-xl transition-all duration-300 cursor-pointer bg-white/10 dark:bg-white/5 border-white/20 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-white/10"
+                onClick={() => handleNavigation('health', 'Health Tips')}
+              >
                 <div className="text-center">
                   <Heart className="w-16 h-16 text-orange-400 mx-auto mb-4" />
                   <h2 className="text-3xl font-bold text-white mb-2">Health Tips</h2>
