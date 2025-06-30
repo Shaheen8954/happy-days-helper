@@ -28,14 +28,14 @@ pipeline {
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Test Application') {
             steps {
                 script {
-                    run_tests()
+                    testApp()
                 }
             }
         }
-
+        
         stage('Build image') {
             steps {
                 script {
@@ -51,6 +51,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Push Docker Images') {
             parallel {
