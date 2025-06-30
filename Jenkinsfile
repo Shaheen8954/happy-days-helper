@@ -31,7 +31,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    docker_build(env.DockerHubUser, env.ProjectName, env.ImageTag)
+                    dockerbuild(env.DockerHubUser, env.ProjectName, env.ImageTag)
                 }
             }
         }
@@ -50,7 +50,7 @@ pipeline {
                 stage('Push to Docker Hub') {
                     steps {
                         script {
-                            docker_push(env.DockerHubUser, env.ProjectName, env.ImageTag)
+                            dockerpush(env.DockerHubUser, env.ProjectName, env.ImageTag)
                         }
                     }
                 }
