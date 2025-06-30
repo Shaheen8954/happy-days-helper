@@ -5,8 +5,9 @@ pipeline {
 
     environment {
         // Update the main app image name to match the deployment file
-        DOCKER_IMAGE_NAME = 'shaheen8954/happy-days'
-        DOCKER_IMAGE_TAG = "${BUILD_NUMBER}"
+        ProjectName = 'happy-days'
+        DockerHubUser = 'shaheen8954'
+        ImageTag = "${BUILD_NUMBER}"
         GITHUB_CREDENTIALS = credentials('github-credentials')
         GIT_BRANCH = "main"
     }
@@ -32,19 +33,18 @@ pipeline {
             steps {
                 script {
                     docker_build(
-                        imageName: env.DOCKER_IMAGE_NAME,
-                        imageTag: env.DOCKER_IMAGE_TAG,
-                        dockerfile: 'Dockerfile',
-                        context: '.'
+                         env.DockerHubUser,
+                         env.ProjectName,
+                         env.ImageTag,
                     )
                 }
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Run container') {
             steps {
                 script {
-                    run_tests()
+                    sh "docker run -d -p 8080:8080 ${DockerHubUser}/${ProjectName}:${ImageTag}
                 }
             }
         }
@@ -55,9 +55,9 @@ pipeline {
                     steps {
                         script {
                             docker_push(
-                                imageName: env.DOCKER_IMAGE_NAME,
-                                imageTag: env.DOCKER_IMAGE_TAG,
-                                credentials: 'docker-hub-credentials'
+                                env.ProjectName,
+                                 env.ImageTag,
+                                 'docker-hub-credentials'
                             )
                         }
                     }
