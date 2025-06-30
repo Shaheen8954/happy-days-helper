@@ -44,7 +44,7 @@ pipeline {
         stage('Run container') {
             steps {
                 script {
-                    sh "docker run -d -p 8080:8080 ${DockerHubUser}/${ProjectName}:${ImageTag}
+                    sh "docker run -d -p 8080:8080 ${DockerHubUser}/${ProjectName}:${ImageTag}"
                 }
             }
         }
