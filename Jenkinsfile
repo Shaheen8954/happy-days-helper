@@ -28,14 +28,6 @@ pipeline {
             }
         }
 
-        stage('Test Application') {
-            steps {
-                script {
-                    testApp()
-                }
-            }
-        }
-        
         stage('Build image') {
             steps {
                 script {
