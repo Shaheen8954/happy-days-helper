@@ -144,44 +144,8 @@ const Index = () => {
       {/* Tubelight Navigation */}
       <NavBar items={navItems} />
 
-      {/* Secondary Header */}
-      <header className="bg-white/10 dark:bg-white/5 backdrop-blur-sm border-b border-white/20 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              {currentView !== 'home' && (
-                <Button
-                  onClick={() => handleNavigation('home', 'Home')}
-                  variant="ghost"
-                  className="text-2xl font-bold text-white hover:bg-white/20 px-6 py-3"
-                >
-                  <ArrowLeft className="w-8 h-8 mr-2" />
-                  Back
-                </Button>
-              )}
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Button
-                onClick={() => setVoiceEnabled(!voiceEnabled)}
-                variant={voiceEnabled ? "default" : "outline"}
-                size="lg"
-                className="text-xl px-6 py-3 bg-white/10 border-white/20 hover:bg-white/20 backdrop-blur-sm"
-              >
-                <Volume2 className="w-6 h-6 mr-2" />
-                Voice {voiceEnabled ? 'ON' : 'OFF'}
-              </Button>
-              
-              <ThemeToggle />
-              
-              <EmergencyButton />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      {/* Main Content - Added pt-24 to account for navbar height */}
+      <main className="max-w-7xl mx-auto px-6 py-12 pt-32">
         {renderCurrentView()}
       </main>
 

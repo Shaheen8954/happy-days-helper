@@ -3,8 +3,10 @@
 
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { LucideIcon } from "lucide-react"
+import { LucideIcon, Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useTheme } from "@/contexts/ThemeContext"
+import { MinimalToggle } from "./toggle"
 
 interface NavItem {
   name: string
@@ -38,6 +40,18 @@ export function NavBar({ items, className }: NavBarProps) {
       setActiveTab(activeItem.name)
     }
   }, [items])
+
+  const { theme, toggleTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure we're not rendering theme-dependent content on the server
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <div
@@ -89,6 +103,17 @@ export function NavBar({ items, className }: NavBarProps) {
             </button>
           )
         })}
+        
+        {/* Theme Toggle */}
+        <div className="flex items-center gap-2 px-2">
+          <Sun className="h-4 w-4 text-yellow-300" />
+          <MinimalToggle 
+            checked={theme === 'dark'}
+            onChange={toggleTheme}
+            aria-label="Toggle dark mode"
+          />
+          <Moon className="h-4 w-4 text-blue-300" />
+        </div>
       </div>
     </div>
   )
