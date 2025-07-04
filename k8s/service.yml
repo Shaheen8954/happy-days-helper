@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: happy-days
+  namespace: happy-days-helper
+spec:
+  selector:
+    app: happy-days
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000
+  type: NodePort
+

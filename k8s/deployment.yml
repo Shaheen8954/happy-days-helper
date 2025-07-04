@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: happy-days
+  namespace: happy-days-helper
+  labels:
+    app: happy-days
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: happy-days
+  template:
+    metadata:
+      labels:
+        app: happy-days
+    spec:
+      containers:
+      - name: happy-days
+        image: shaheen8954/happy-days-helper:latest
+        ports:
+          - containerPort: 80 
+
