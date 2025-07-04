@@ -4,9 +4,9 @@ pipeline {
     agent any
 
     environment {
-        // Update the main app image name to match the deployment file
-        DOCKER_IMAGE_NAME = 'shaheen8954/happy-days'
-        DOCKER_IMAGE_TAG = "${BUILD_NUMBER}"
+        DockerHubUser = 'shaheen8954'
+        ProjectName = 'happy-days'
+        ImageTag = "${BUILD_NUMBER}"
         GITHUB_CREDENTIALS = credentials('github-credentials')
         GIT_BRANCH = "main"
     }
@@ -31,34 +31,26 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    docker_build(
-                        imageName: env.DOCKER_IMAGE_NAME,
-                        imageTag: env.DOCKER_IMAGE_TAG,
-                        dockerfile: 'Dockerfile',
-                        context: '.'
-                    )
+                    dockerbuild(env.DockerHubUser, env.ProjectName, env.ImageTag)
                 }
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Security Scan with Trivy') {
             steps {
                 script {
-                    run_tests()
+                    trivy(env.DockerHubUser, env.ProjectName, env.ImageTag)
                 }
             }
         }
+
 
         stage('Push Docker Images') {
             parallel {
                 stage('Push to Docker Hub') {
                     steps {
                         script {
-                            docker_push(
-                                imageName: env.DOCKER_IMAGE_NAME,
-                                imageTag: env.DOCKER_IMAGE_TAG,
-                                credentials: 'docker-hub-credentials'
-                            )
+                            dockerpush(env.DockerHubUser, env.ProjectName, env.ImageTag)
                         }
                     }
                 }
