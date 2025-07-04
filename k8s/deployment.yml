@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: happy-days
-        image: shaheen8954/happy-days-helper:latest
+        image: shaheen8954/happy-days-helper2
         ports:
           - containerPort: 80 
 
